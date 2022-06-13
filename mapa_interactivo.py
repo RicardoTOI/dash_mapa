@@ -5,24 +5,21 @@ import plotly.graph_objs as go
 from dash.dependencies import Input, Output
 import pandas as pd
 import folium
-import random
-import numpy as np
 from dash.dash_table import FormatTemplate
 money = FormatTemplate.money(0)
 import locale
 locale.setlocale( locale.LC_ALL, '' )
 
 #Leer datos de mysql
-import mysql.connector
+import mysql
 
 conexion = mysql.connector.connect(
-    user='root', password='TOIFELIZ2022', host='localhost',
-    database='inmuebles24', port='3306')
+    user='root', password='TOIFELIZ2022', host='localhost',database='inmuebles24', port=3306)
 
 #Creamos un objeto cursor
 cursor= conexion.cursor()
 #Usamos toda la sql
-cursor.execute("SELECT * from casas_departamentos_venta")
+cursor.execute("SELECT * from casas_departamentos")
 #Lo ponemos en una df
 df = pd.DataFrame(cursor.fetchall())
 conexion.close()
